@@ -5,11 +5,13 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "pillow>=11.2.1",
-    "pytesseract>=0.3.13",
+  "ocrmac>=1.0.0",
+  "pillow>=11.2.1",
+  "pytesseract>=0.3.13",
 ]
 
 [tool.uv.workspace]
 members = [
-    "packages/pytess",
+  "packages/pytess",
+  "packages/try-ocrmac",
 ]

@@ -1,9 +1,8 @@
 import pytesseract
-from PIL import ImageEnhance, ImageFilter, ImageOps
-from PIL.image import Image
+from PIL import Image, ImageEnhance, ImageFilter, ImageOps
 
 
-def adaptive_threshold(image: Image, scale: float) -> Image:
+def adaptive_threshold(image: Image.Image, scale: float) -> Image.Image:
     # Convert the image to grayscale.
     gray_image = ImageOps.grayscale(image)
 
@@ -11,14 +10,14 @@ def adaptive_threshold(image: Image, scale: float) -> Image:
     scale_factor = scale
     resized_image = gray_image.resize(
         (gray_image.width * scale_factor, gray_image.height * scale_factor),
-        resample=Image.LANCZOS,
+        resample=Image.Resampling.LANCZOS,
     )
 
     # Apply edge detection filter (find edges).
     return resized_image.filter(ImageFilter.FIND_EDGES)
 
 
-def preprocess(image: Image, scale: float, enhance: float) -> Image:
+def preprocess(image: Image.Image, scale: float, enhance: float) -> Image.Image:
     image = image.convert("RGB")
 
     image = ImageOps.autocontrast(image, cutoff=0.9)
@@ -38,12 +37,12 @@ def preprocess(image: Image, scale: float, enhance: float) -> Image:
     scale_factor = scale
     return image.resize(
         (image.width * scale_factor, image.height * scale_factor),
-        resample=Image.LANCZOS,
+        resample=Image.Resampling.LANCZOS,
     )
 
 
 def extract_text(
-    image: Image, psm: int = 3, scale: float = 1, enhance: float = 1.0
+    image: Image.Image, psm: int = 3, scale: float = 1, enhance: float = 1.0
 ) -> str:
     config = f"--psm {psm} -l eng"
 

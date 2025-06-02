@@ -11,8 +11,8 @@ def extract(image_path, dict_from_text):
     image = Image.open(image_path)
 
     for params in [
-        {"scale": 2},
         {"psm": 11, "scale": 2},
+        {"psm": 3, "scale": 2},
     ]:
         logger.info("using parameters: %s", params)
         text = image_to_text.extract_text(image, **params)

@@ -31,7 +31,6 @@ def preprocess(image, scale):
 def extract_text(image, psm=3, scale=1):
     config = f"--psm {psm} -l eng"
 
-    # image = adaptive_threshold(image)
     image = preprocess(image, scale=scale)
 
     return pytesseract.image_to_string(image, config=config)

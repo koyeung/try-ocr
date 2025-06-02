@@ -4,6 +4,8 @@ from PIL import Image
 
 from pytess import image_to_text
 
+logger = logging.getLogger(__name__)
+
 
 def extract(image_path, dict_from_text):
     image = Image.open(image_path)
@@ -12,9 +14,9 @@ def extract(image_path, dict_from_text):
         {"scale": 2},
         {"psm": 11, "scale": 2},
     ]:
-        logging.info("using parameters: %s", params)
+        logger.info("using parameters: %s", params)
         text = image_to_text.extract_text(image, **params)
-        logging.debug("text: ", text)
+        logger.debug("text: %s", text)
         data = dict_from_text(text)
         if data:
             return data

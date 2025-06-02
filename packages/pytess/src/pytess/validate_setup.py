@@ -6,7 +6,7 @@ from pytess import extract, hsi
 
 logger = logging.getLogger(__name__)
 
-IGNORE = [
+IGNORE: list[str] = [
     # "m8_00700.jpg",
 ]
 
@@ -16,8 +16,9 @@ def main():
 
     image_base_dir = pathlib.Path(sys.argv[1])
 
-    filename_pat = "d3*.jpg"
+    # filename_pat = "d3*.jpg"
     # filename_pat = "m8*.jpg"
+    filename_pat = "w3*.jpg"
 
     logger.info("filename pattern: %s", filename_pat)
 
@@ -25,7 +26,7 @@ def main():
         if image_path.name in IGNORE:
             logger.info("bypass file: %s", image_path)
             continue
-        
+
         logger.info("image file: %s", image_path)
 
         result = extract.extract(image_path, hsi.dict_from_text)

@@ -1,22 +1,22 @@
-import pytesseract
-from PIL import Image, ImageOps
+import logging
+
+from PIL import Image
+
+from pytess import image_to_text
 
 
-def extract_text(image_path):
-    CONFIG = "-l eng"
-
-    def preprocess(image):
-        # Convert to grayscale
-        image = ImageOps.grayscale(image)
-
-        # Resize the image.
-        scale_factor = 2
-        return image.resize(
-            (image.width * scale_factor, image.height * scale_factor),
-            resample=Image.LANCZOS,
-        )
-
+def extract(image_path, dict_from_text):
     image = Image.open(image_path)
-    image = preprocess(image)
 
-    return pytesseract.image_to_string(image, config=CONFIG)
+    for params in [
+        {"scale": 2},
+        {"psm": 11, "scale": 2},
+    ]:
+        logging.info("using parameters: %s", params)
+        text = image_to_text.extract_text(image, **params)
+        logging.debug("text: ", text)
+        data = dict_from_text(text)
+        if data:
+            return data
+
+    return {}

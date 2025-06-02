@@ -1,0 +1,10 @@
+package := file_name(justfile_directory())
+
+default:
+    just --list
+
+lint *FILE:
+    ruff check {{FILE}}
+
+typing:
+    uv run --package "{{package}}" --with=pip mypy --install-types --non-interactive src

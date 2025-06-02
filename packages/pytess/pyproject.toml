@@ -11,6 +11,7 @@ dependencies = [
 
 [project.scripts]
 pytess = "pytess:main"
+validate-setup = "pytess.validate_setup:main"
 
 [build-system]
 requires = ["hatchling"]

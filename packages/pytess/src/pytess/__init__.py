@@ -1,28 +1,18 @@
-import re
+import logging
 import sys
 
-from pytess import extract
-
-
-def extract_data(image_path):
-    text = extract.extract_text(image_path)
-    m = re.search(r"RSI \(14\) = (?P<RSI14>\d+\.\d+)", text)
-
-    return m.groupdict()
+from pytess import extract, hsi14
 
 
 def main():
-    print("Hello from testocr!")
+    logging.basicConfig(level=logging.INFO)
 
-    # image_path = "data/d3_00002.jpg"
-    # image_path = "data/d3_00027.jpg"
-    # image_path = "data/d3_03692.jpg"
     image_path = sys.argv[1]
+    logging.info("image file: %s", image_path)
 
-    print(f"image file: {image_path}")
-
-    result = extract_data(image_path)
-    print(result)
+    result = extract.extract(image_path, hsi14.dict_from_text)
+    assert result  # noqa: S101
+    logging.info(result)
 
 
 if __name__ == "__main__":

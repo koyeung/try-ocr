@@ -153,7 +153,7 @@ wheels = [
 [[package]]
 name = "pytess"
 version = "0.1.0"
-source = { virtual = "packages/pytess" }
+source = { editable = "packages/pytess" }
 dependencies = [
     { name = "pillow" },
     { name = "pytesseract" },
@@ -182,18 +182,6 @@ wheels = [
 name = "try-ocr"
 version = "0.1.0"
 source = { virtual = "." }
-dependencies = [
-    { name = "ocrmac" },
-    { name = "pillow" },
-    { name = "pytesseract" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "ocrmac", specifier = ">=1.0.0" },
-    { name = "pillow", specifier = ">=11.2.1" },
-    { name = "pytesseract", specifier = ">=0.3.13" },
-]
 
 [[package]]
 name = "try-ocrmac"

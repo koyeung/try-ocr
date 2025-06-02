@@ -2,7 +2,7 @@ import logging
 import pathlib
 import sys
 
-from pytess import extract, hsi
+from pytess import extract, rsi
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +29,7 @@ def main():
 
         logger.info("image file: %s", image_path)
 
-        result = extract.extract(image_path, hsi.dict_from_text)
+        result = extract.extract(image_path, rsi.dict_from_text)
         assert result  # noqa: S101
 
         logger.info(result)

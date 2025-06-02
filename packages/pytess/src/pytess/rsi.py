@@ -1,6 +1,6 @@
 import re
 
-HSI = r"""
+RSI = r"""
 (?P<name>
     (
         RSI\s?
@@ -20,7 +20,7 @@ HSI = r"""
 
 
 def dict_from_text(text: str) -> dict[str, str]:
-    m = re.search(HSI, text, flags=re.VERBOSE)
+    m = re.search(RSI, text, flags=re.VERBOSE)
     if m:
         return m.groupdict()
 

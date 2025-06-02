@@ -2,9 +2,13 @@ import logging
 import pathlib
 import sys
 
-from pytess import extract, hsi14
+from pytess import extract, hsi
 
 logger = logging.getLogger(__name__)
+
+IGNORE = [
+    # "m8_00700.jpg",
+]
 
 
 def main():
@@ -12,11 +16,21 @@ def main():
 
     image_base_dir = pathlib.Path(sys.argv[1])
 
-    for image_path in image_base_dir.glob("d6*.jpg"):
+    filename_pat = "d3*.jpg"
+    # filename_pat = "m8*.jpg"
+
+    logger.info("filename pattern: %s", filename_pat)
+
+    for image_path in sorted(image_base_dir.glob(filename_pat)):
+        if image_path.name in IGNORE:
+            logger.info("bypass file: %s", image_path)
+            continue
+        
         logger.info("image file: %s", image_path)
 
-        result = extract.extract(image_path, hsi14.dict_from_text)
+        result = extract.extract(image_path, hsi.dict_from_text)
         assert result  # noqa: S101
+
         logger.info(result)
 
 

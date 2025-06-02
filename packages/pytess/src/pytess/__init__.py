@@ -1,7 +1,7 @@
 import logging
 import sys
 
-from pytess import extract, hsi14
+from pytess import extract, hsi
 
 logger = logging.getLogger(__name__)
 
@@ -12,8 +12,9 @@ def main():
     image_path = sys.argv[1]
     logger.info("image file: %s", image_path)
 
-    result = extract.extract(image_path, hsi14.dict_from_text)
+    result = extract.extract(image_path, hsi.dict_from_text)
     assert result  # noqa: S101
+
     logger.info("result: %s", result)
 
 

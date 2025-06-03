@@ -4,7 +4,7 @@ import sys
 
 from pytess import extract, rsi
 
-logger = logging.getLogger(__name__)
+LOGGER = logging.getLogger(__name__)
 
 IGNORE: list[str] = [
     # "m8_00700.jpg",
@@ -20,19 +20,19 @@ def main():
     # filename_pat = "m8*.jpg"
     filename_pat = "w3*.jpg"
 
-    logger.info("filename pattern: %s", filename_pat)
+    LOGGER.info("filename pattern: %s", filename_pat)
 
     for image_path in sorted(image_base_dir.glob(filename_pat)):
         if image_path.name in IGNORE:
-            logger.info("bypass file: %s", image_path)
+            LOGGER.info("bypass file: %s", image_path)
             continue
 
-        logger.info("image file: %s", image_path)
+        LOGGER.info("image file: %s", image_path)
 
         result = extract.extract(image_path, rsi.dict_from_text)
         assert result  # noqa: S101
 
-        logger.info(result)
+        LOGGER.info(result)
 
 
 if __name__ == "__main__":

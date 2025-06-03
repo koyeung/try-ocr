@@ -7,7 +7,7 @@ from PIL import Image
 
 from pytess import image_to_text
 
-logger = logging.getLogger(__name__)
+LOGGER = logging.getLogger(__name__)
 
 
 class Params(TypedDict):
@@ -31,10 +31,10 @@ def extract(
     image = Image.open(image_path)
 
     for params in PARAMS:
-        logger.info("using parameters: %s", params)
+        LOGGER.info("using parameters: %s", params)
 
         text = image_to_text.extract_text(image, **params)
-        logger.debug("text: %s", text)
+        LOGGER.debug("text: %s", text)
 
         data = dict_from_text(text)
         if data:

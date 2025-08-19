@@ -23,7 +23,22 @@ major_version_zero = true
 ignore_missing_imports = true
 
 [tool.ruff]
-extend = "ruff_defaults.toml"
+lint.select = [
+  "ALL",
+]
+
+lint.ignore = [
+  "ANN",    # let mypy do the checking
+  "COM",    # let formatter do the checking
+  "CPY001", # Ok to Missing copyright notice at top of file
+  "D",      # not much on doc style
+  "ERA",    # comment out code in playground project is fine
+  "LOG015", # fine for testing code
+]
+
+lint.isort.known-first-party = [
+  "src",
+]
 
 lint.preview = true
 
